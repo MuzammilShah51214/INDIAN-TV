@@ -219,6 +219,46 @@
             animation: glow 1.5s ease-in-out infinite alternate;
         }
         
+        /* LIVE Badge Styles */
+        .channel-btn::after, .iframe-channel-btn::after {
+            content: 'LIVE';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            z-index: 2;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+            animation: pulse-live 1.5s infinite;
+        }
+
+        /* For iframe buttons */
+        .iframe-channel-btn::after {
+            top: 8px;
+            right: 8px;
+            font-size: 9px;
+        }
+
+        @keyframes pulse-live {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 5px rgba(255, 0, 0, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+            }
+        }
+        
         /* Iframe container styles */
         #iframe-container {
             position: fixed;
@@ -460,6 +500,7 @@
             box-shadow: 0 0 10px var(--neon-blue);
         }
         
+        /* Adjust for mobile */
         @media (max-width: 768px) {
             #player {
                 padding-bottom: 56.25%;
@@ -496,6 +537,14 @@
             #iframe-container {
                 width: 95%;
                 height: 60vh;
+            }
+            
+            /* Adjust LIVE badge for mobile */
+            .channel-btn::after, .iframe-channel-btn::after {
+                top: 5px;
+                right: 5px;
+                font-size: 15px;
+                padding: 2px 4px;
             }
         }
         
@@ -561,7 +610,9 @@
     
     <div class="animated" style="text-align: center; padding-top: 20%;"></div> 
     
-    <div id="channel-buttons">
+    
+        
+        <div id="channel-buttons">
         <!-- Entertainment Channels -->
         <div class="channel-btn entertainment" 
              data-stream="https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeetv/default/manifest.mpd" 
@@ -570,21 +621,20 @@
             <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/yHNSuG1V.png" alt="Zee TV">
             <div class="channel-name">Zee TV</div>
         </div>
-        
-       
-            
-            
-      <a href="https://redmi.allinonereborn.xyz/ze/play.php?id=https://z5ak-cmaflive.zee5.com/cmaf/live/2105531/ZeeTVHDMSLELE/index-connected.m3u8" class="iframe-channel-btn entertainment">
-    <img src="https://multireach.in/wp-content/uploads/2023/04/ZEE-TV-HD.png">
-    <div class="iframe-channel-name">ZEE TV HD</div>
-</a>      
-            
+    
 
-            
-            
-            
-            
-            
+       
+
+
+<div class="iframe-channel-btn kids" data-src="https://amitb3669.github.io/allinonereborn/disni.html">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Disney_Channel_2014_HD.png"><div class="iframe-channel-name">Disney HD</div></div> 
+
+
+
+
+    
+       <div class="iframe-channel-btn entertainment" data-src="https://redmi.allinonereborn.xyz/ze/play.php?id=https://z5ak-cmaflive.zee5.com/cmaf/live/2105531/ZeeTVHDMSLELE/index-connected.m3u8">
+            <img src="https://multireach.in/wp-content/uploads/2023/04/ZEE-TV-HD.png"><div class="iframe-channel-name">ZEE TV HD</div></div> 
         
         <div class="channel-btn entertainment" data-stream="https://redmi.allinonereborn.xyz/jiotv-ww/app/live.php?id=1368&e=.m3u8">
             <img src="https://jiotv.catchup.cdn.jio.com/dare_images/images/Colors_SD.png">
@@ -607,22 +657,6 @@
             <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/QjKdER9Z.png" alt="Zee Anmool">
             <div class="channel-name">Zee Anmool</div>
         </div>
-        
-        
-        
-        
-    <div class="channel-btn entertainment" data-stream="https://d1g8wgjurz8via.cloudfront.net/bpk-tv/Zeeanmol/default/manifest.mpd"
-             data-keyid="4023613457774cbeb71a62c339970e63"
-             data-key="1c3e9fce5f014542be9cd1f749181204">
-            <img src="https://imagesdishtvd2h.whatsonindia.com/dasimages/channel/landscape/360x270/QjKdER9Z.png" alt="Zee Anmool">
-            <div class="channel-name">Zee Anmool</div>
-        </div>    
-        
-        
-        
-        
-        
-        
         
         <!-- Iframe buttons - now matching channel buttons style -->
         <div class="iframe-channel-btn entertainment" data-src="https://allinonereborn.space/sony/player2.html?id=sony-hd">
@@ -1241,20 +1275,8 @@
      
     <div class="iframe-channel-btn sports" data-src="https://allinonereborn.space/sony/player2.html?id=sony-ten-5-hd">
             <img src=" https://jiotv.catchup.cdn.jio.com/dare_images/images/Six_HD.png">
-            <div class="iframe-channel-name">Sony Ten 5 HD</div></div>     
+            <div class="iframe-channel-name">Sony Ten 5 HD</div></div>     </div>
         
-           
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-    </div>
     
     <!-- Copyright Footer -->
     <div id="copyright-footer">
@@ -1297,28 +1319,9 @@
                     stretching: "uniform"
                 });
 
-                // Add neon effect to player controls
                 playerInstance.on('ready', function() {
                     playerInstance.setMute(false);
                     playerInstance.play();
-                    
-                    // Add neon glow to control bar
-                    const controlBar = document.querySelector('.jw-controlbar');
-                    if (controlBar) {
-                        controlBar.style.boxShadow = '0 0 15px var(--neon-blue)';
-                        controlBar.style.transition = 'box-shadow 0.5s ease';
-                    }
-                    
-                    // Add hover effects to control buttons
-                    const controlButtons = document.querySelectorAll('.jw-icon');
-                    controlButtons.forEach(btn => {
-                        btn.addEventListener('mouseenter', function() {
-                            this.style.filter = 'drop-shadow(0 0 5px var(--neon-pink))';
-                        });
-                        btn.addEventListener('mouseleave', function() {
-                            this.style.filter = 'none';
-                        });
-                    });
                 });
 
                 playerInstance.on('error', function(e) {
@@ -1387,29 +1390,6 @@
                         playerInstance.setMute(false);
                         playerInstance.play();
 
-                        // Add glowing effect to active channel
-                        const neonGlow = document.createElement('div');
-                        neonGlow.className = 'neon-glow';
-                        neonGlow.style.position = 'absolute';
-                        neonGlow.style.top = '0';
-                        neonGlow.style.left = '0';
-                        neonGlow.style.width = '100%';
-                        neonGlow.style.height = '100%';
-                        neonGlow.style.borderRadius = '10px';
-                        neonGlow.style.background = 'linear-gradient(45deg, var(--neon-pink), var(--neon-blue))';
-                        neonGlow.style.zIndex = '-1';
-                        neonGlow.style.filter = 'blur(5px)';
-                        neonGlow.style.opacity = '0.7';
-                        neonGlow.style.animation = 'neon-pulse 1.5s infinite alternate';
-                        
-                        // Remove any existing glow effects
-                        const existingGlow = this.querySelector('.neon-glow');
-                        if (existingGlow) {
-                            existingGlow.remove();
-                        }
-                        
-                        this.appendChild(neonGlow);
-
                     } catch (error) {
                         showError('Error loading channel: ' + error.message);
                     }
@@ -1470,19 +1450,6 @@
                     iframeContent.onload = function() {
                         iframeLoader.style.display = 'none';
                         iframeContent.style.display = 'block';
-                        
-                        // Try to autoplay the video in the iframe
-                        try {
-                            // This assumes the iframe content has a video element with autoplay
-                            // If the iframe is from a different domain, this might be restricted
-                            const iframeDoc = iframeContent.contentDocument || iframeContent.contentWindow.document;
-                            const videos = iframeDoc.getElementsByTagName('video');
-                            if (videos.length > 0) {
-                                videos[0].play().catch(e => console.log('Autoplay prevented:', e));
-                            }
-                        } catch (e) {
-                            console.log('Could not access iframe content:', e);
-                        }
                     };
                 });
             });
@@ -1571,44 +1538,8 @@
             }
         });
     });
-
-    // Add CSS for neon appear animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes neon-appear {
-            0% {
-                opacity: 0;
-                transform: scale(0.9);
-                filter: brightness(0.5) drop-shadow(0 0 5px var(--neon-pink));
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-                filter: brightness(1) drop-shadow(0 0 10px var(--neon-blue));
-            }
-        }
-        
-        .jw-svg-icon:hover {
-            filter: drop-shadow(0 0 5px var(--neon-pink));
-        }
-        
-        .jw-progress {
-            background-color: var(--neon-blue) !important;
-        }
-        
-        .jw-buffer {
-            background-color: rgba(5, 217, 232, 0.3) !important;
-        }
-        
-        .jw-slider-container:hover .jw-progress {
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
-        
-        .jw-icon-display:hover {
-            color: var(--neon-pink) !important;
-        }
-    `;
-    document.head.appendChild(style);
-</script>
+    </script>
 </body>
-</html>
+</html>         
+            
+            
